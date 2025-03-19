@@ -170,7 +170,10 @@ cython_debug/
 # Ruff stuff:
 .ruff_cache/
 
+# Ignore environment variables
 .env
+config.py
+__pycache__/
 database.ini
 
 # PyPI configuration file
