@@ -1,11 +1,13 @@
 import psycopg2 
-from .config import load_config 
+from queries_postgresql import run
+from config import load_config 
 
 def connect_postgresql(config):
     try: 
         conn = psycopg2.connect(**config)
         print('Connected to the PostgerSQL server')
-        return conn
+        run(conn)
+        return conn # do i need it here, that is the question 
     except (psycopg2.DatabaseError, Exception) as error: 
         print(error)
         return None 

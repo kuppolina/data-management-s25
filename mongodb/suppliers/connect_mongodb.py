@@ -2,7 +2,7 @@ import pymongo
 import certifi
 import os
 from dotenv import load_dotenv
-    
+from queries_mongodb import run
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
@@ -27,12 +27,12 @@ def connect_mongodb():
                         server_api=ServerApi('1'),
                         tlsCAFile=certifi.where()
                         )
-
-    # Send a ping to confirm a successful connection
         client.admin.command('ping')
-        print("Pinged your deployment. You successfully connected to MongoDB!")
-        return client; 
+        print("You successfully connected to MongoDB")
+
+        run(client)
+
     except Exception as e:
         print(e)
         
-# connect_mongodb()
+connect_mongodb()
