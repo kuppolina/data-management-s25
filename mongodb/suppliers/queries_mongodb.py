@@ -57,7 +57,7 @@ def query_joins(mydb):
                     "$lookup": {
                         "from": "categories",
                         "localField": "category_id",
-                        "foreignField": "category_id",
+                        "foreignField": "_id",
                         "as": "category_details"
                     }
                 },
@@ -68,7 +68,7 @@ def query_joins(mydb):
                     "$lookup": {
                         "from": "films",
                         "localField": "film_id",
-                        "foreignField": "film_id",
+                        "foreignField": "_id",
                         "as": "film_details"
                     }
                 },
@@ -77,7 +77,7 @@ def query_joins(mydb):
                 }, 
                 {
                     "$group": {
-                        "_id": "category_details.name", 
+                        "_id": "$category_details.name", 
                         "amount": {"$sum":1}
                     }
                 },
@@ -94,6 +94,11 @@ def query_joins(mydb):
                     }
                 }
             ])  
+        
+        # Print results
+        print("the result ")
+        for doc in result:
+            print(doc)
         
         list(result)
         print("Executed process_query_with_lookup")  
